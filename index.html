@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071a2e">
+  <meta name="description" content="Portal institucional da Guarda Municipal de Belém. Informações, serviços ao cidadão, grupamentos e canais de atendimento.">
+  <title>Guarda Municipal de Belém | Portal Institucional</title>
+  <style>
+    :root{
+      --navy:#071a2e;--blue:#103b62;--mid:#174f78;--gold:#d6ac52;
+      --white:#fff;--mist:#f3f5f7;--ink:#252d36;--muted:#647181;
+      --line:#dce3e9;--surface:#fff;--shadow:0 18px 48px rgba(7,26,46,.12);
+      --radius:20px;--max:1180px
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:92px}
+    body{margin:0;background:var(--mist);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}
+    body.large-text{font-size:1.12rem}
+    body.high-contrast{--mist:#fff;--ink:#000;--muted:#222;--line:#555;--surface:#fff;--blue:#001f3f;--mid:#003b70}
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}
+    button,a{-webkit-tap-highlight-color:transparent}
+    button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+    .skip{position:absolute;left:12px;top:-60px;background:#fff;color:#000;padding:10px 14px;z-index:1000;border-radius:8px}
+    .skip:focus{top:12px}
+    .container{width:min(var(--max),calc(100% - 40px));margin-inline:auto}
+    .topline{background:#041321;color:#dce7ef;font-size:.78rem}
+    .topline .container{display:flex;justify-content:space-between;gap:16px;padding:8px 0}
+    .topline strong{color:var(--gold);letter-spacing:.08em}
+    .site-header{position:sticky;top:0;z-index:100;background:rgba(7,26,46,.96);color:#fff;box-shadow:0 8px 28px rgba(0,0,0,.12);backdrop-filter:blur(12px)}
+    .nav-wrap{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+    .brand{display:flex;align-items:center;gap:13px;min-width:230px}
+    .crest{width:48px;height:48px;display:grid;place-items:center;border:1px solid rgba(214,172,82,.7);border-radius:14px;color:var(--gold);background:rgba(255,255,255,.04)}
+    .crest svg{width:29px;height:29px}
+    .brand-name{font-size:.88rem;line-height:1.2;font-weight:800;letter-spacing:.035em}
+    .brand-name small{display:block;color:#b9c8d5;font-size:.64rem;font-weight:600;letter-spacing:.12em;margin-top:5px}
+    .nav-links{display:flex;align-items:center;gap:clamp(12px,1.6vw,23px);font-size:.82rem;font-weight:650}
+    .nav-links a{color:#e4edf4;transition:color .2s}
+    .nav-links a:hover{color:var(--gold)}
+    .nav-actions{display:flex;align-items:center;gap:9px}
+    .icon-btn,.menu-toggle{width:42px;height:42px;border:1px solid rgba(255,255,255,.2);background:transparent;color:#fff;border-radius:12px;display:grid;place-items:center;cursor:pointer}
+    .icon-btn svg,.menu-toggle svg{width:19px;height:19px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 19px;border-radius:12px;font-weight:800;font-size:.84rem;border:1px solid transparent;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-gold{background:var(--gold);color:var(--navy);box-shadow:0 8px 22px rgba(214,172,82,.18)}
+    .btn-outline{border-color:rgba(255,255,255,.42);color:#fff;background:rgba(255,255,255,.04)}
+    .btn-blue{background:var(--blue);color:#fff}
+    .menu-toggle{display:none}
+    .hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(112deg,#071a2e 0%,#0b2d4c 58%,#174f78 100%);min-height:590px;display:flex;align-items:center}
+    .hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 82% 34%,rgba(214,172,82,.16),transparent 27%),linear-gradient(90deg,rgba(7,26,46,.18),transparent)}
+    .hero:after{content:"";position:absolute;width:520px;height:520px;border:1px solid rgba(214,172,82,.2);border-radius:50%;right:-100px;top:-130px;box-shadow:0 0 0 48px rgba(214,172,82,.035),0 0 0 100px rgba(214,172,82,.025)}
+    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:48px;padding:78px 0}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--gold);font-size:.72rem;font-weight:850;letter-spacing:.17em;text-transform:uppercase}
+    .eyebrow:before{content:"";width:28px;height:2px;background:var(--gold)}
+    h1{font-size:clamp(2.7rem,5.2vw,5rem);line-height:.99;letter-spacing:-.055em;margin:22px 0 20px;max-width:720px}
+    .hero-copy{font-size:1.12rem;color:#d6e1ea;max-width:600px;margin:0 0 14px}
+    .hero-quote{font-size:.9rem;color:#f0dba9;font-weight:650;margin:0 0 30px}
+    .hero-buttons{display:flex;flex-wrap:wrap;gap:12px}
+    .hero-art{min-height:340px;position:relative;display:grid;place-items:center}
+    .shield{width:min(330px,80%);aspect-ratio: .82;clip-path:polygon(50% 0,94% 15%,88% 69%,50% 100%,12% 69%,6% 15%);background:linear-gradient(145deg,rgba(214,172,82,.96),rgba(165,119,42,.92));padding:3px;filter:drop-shadow(0 28px 40px rgba(0,0,0,.25))}
+    .shield-inner{height:100%;clip-path:polygon(50% 0,94% 15%,88% 69%,50% 100%,12% 69%,6% 15%);background:linear-gradient(145deg,#103b62,#071a2e);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:34px}
+    .shield-inner svg{width:92px;height:92px;color:var(--gold);margin-bottom:18px}
+    .shield-inner b{font-size:1.2rem;letter-spacing:.1em;color:#fff}
+    .shield-inner span{font-size:.67rem;letter-spacing:.18em;color:#d6ac52;margin-top:7px}
+    .orbit{position:absolute;width:390px;height:390px;border:1px dashed rgba(255,255,255,.2);border-radius:50%;animation:spin 55s linear infinite}
+    .orbit:before,.orbit:after{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px var(--gold)}
+    .orbit:before{top:42px;left:65px}.orbit:after{right:28px;bottom:85px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .hero-note{position:absolute;bottom:20px;right:0;color:#aebfce;font-size:.68rem;letter-spacing:.06em}
+    .quick-section{position:relative;margin-top:-32px;z-index:2}
+    .quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+    .quick-card{background:#fff;border:1px solid #e5eaf0;border-radius:16px;padding:19px;box-shadow:var(--shadow);min-height:138px;display:flex;flex-direction:column;align-items:flex-start;transition:transform .2s,border .2s}
+    .quick-card:hover{transform:translateY(-5px);border-color:var(--gold)}
+    .quick-card .q-icon{width:39px;height:39px;border-radius:12px;background:#edf3f8;color:var(--blue);display:grid;place-items:center;margin-bottom:12px}
+    .q-icon svg{width:20px;height:20px}
+    .quick-card strong{font-size:.91rem;color:var(--navy)}
+    .quick-card span:last-child{font-size:.75rem;color:var(--muted);margin-top:4px}
+    .quick-card.emergency{background:var(--gold);border-color:var(--gold)}
+    .quick-card.emergency .q-icon{background:rgba(7,26,46,.1);color:var(--navy)}
+    .quick-card.emergency strong,.quick-card.emergency span:last-child{color:var(--navy)}
+    section.content-section{padding:92px 0}
+    .section-head{max-width:700px;margin-bottom:34px}
+    .kicker{font-size:.72rem;color:#9b762e;letter-spacing:.16em;text-transform:uppercase;font-weight:850}
+    h2{font-size:clamp(2rem,3.4vw,3.15rem);line-height:1.08;letter-spacing:-.04em;color:var(--navy);margin:10px 0 13px}
+    .section-head p{color:var(--muted);margin:0;font-size:1rem}
+    .about{display:grid;grid-template-columns:1fr .85fr;gap:64px;align-items:center}
+    .about-panel{background:linear-gradient(145deg,var(--navy),var(--blue));color:#fff;border-radius:26px;padding:36px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+    .about-panel:after{content:"";position:absolute;width:230px;height:230px;border:1px solid rgba(214,172,82,.32);border-radius:50%;right:-80px;bottom:-100px;box-shadow:0 0 0 30px rgba(214,172,82,.05),0 0 0 65px rgba(214,172,82,.035)}
+    .about-panel .mini{color:var(--gold);font-size:.7rem;letter-spacing:.16em;font-weight:800}
+    .about-panel h3{font-size:1.5rem;line-height:1.2;margin:14px 0}
+    .about-panel p{color:#d3e0ea;margin:0;position:relative;z-index:1}
+    .about-copy p{color:var(--muted);margin:0 0 18px}
+    .value-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0 28px}
+    .value{display:flex;align-items:center;gap:10px;font-size:.85rem;font-weight:750;color:var(--blue)}
+    .value i{width:8px;height:8px;background:var(--gold);border-radius:50%;flex:none}
+    .units-section{background:#eaf0f4}
+    .units-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+    .unit-card{background:#fff;border:1px solid #e1e8ee;border-radius:17px;padding:23px;min-height:190px;transition:transform .2s,box-shadow .2s}
+    .unit-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .unit-code{font-size:.7rem;letter-spacing:.14em;color:#9b762e;font-weight:900}
+    .unit-card h3{font-size:1.03rem;color:var(--navy);margin:12px 0 8px}
+    .unit-card p{font-size:.82rem;color:var(--muted);margin:0}
+    .unit-card small{display:block;margin-top:13px;color:#8793a0;font-size:.68rem}
+    .places-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .place{padding:24px;border-radius:17px;background:#fff;border:1px solid #e5eaf0}
+    .place .number{font-size:.72rem;color:#a17b31;font-weight:900;letter-spacing:.12em}
+    .place h3{font-size:1rem;color:var(--navy);margin:12px 0 6px}
+    .place p{font-size:.83rem;color:var(--muted);margin:0}
+    .notice-band{background:var(--navy);color:#fff;padding:42px 0}
+    .notice-inner{display:flex;align-items:center;justify-content:space-between;gap:30px}
+    .notice-inner h2{color:#fff;font-size:clamp(1.7rem,3vw,2.4rem);margin:0 0 8px}
+    .notice-inner p{color:#c6d4df;margin:0}
+    .news-area{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .news-placeholder{border:1px dashed #b8c5d0;background:#fff;border-radius:18px;padding:28px;min-height:170px}
+    .news-placeholder strong{display:block;color:var(--navy);margin-bottom:8px}
+    .news-placeholder p{margin:0;color:var(--muted);font-size:.88rem}
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .service{display:flex;gap:15px;padding:21px;background:#fff;border:1px solid #e3e9ef;border-radius:16px}
+    .service .q-icon{flex:none;margin:0}
+    .service h3{font-size:.94rem;color:var(--navy);margin:0 0 5px}
+    .service p{font-size:.78rem;color:var(--muted);margin:0}
+    .service a{display:inline-block;margin-top:9px;color:#8b6725;font-size:.76rem;font-weight:850;text-decoration:underline;text-underline-offset:3px}
+    .contact-section{background:#eaf0f4}
+    .contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:30px;align-items:stretch}
+    .contact-card{background:var(--navy);color:#fff;border-radius:22px;padding:32px}
+    .contact-card h2{color:#fff;font-size:2rem}
+    .contact-card p{color:#c9d6e0}
+    .contact-line{padding:15px 0;border-top:1px solid rgba(255,255,255,.14);font-size:.87rem}
+    .contact-line b{display:block;color:var(--gold);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+    .contact-line a{color:#fff;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+    .contact-info{background:#fff;border-radius:22px;padding:32px;border:1px solid #e0e7ed}
+    .contact-info h3{margin:0 0 15px;color:var(--navy)}
+    .contact-info p{color:var(--muted);font-size:.9rem}
+    .contact-info .note{padding:14px 16px;border-left:3px solid var(--gold);background:#f8f6ef;color:#65552f;font-size:.78rem;margin-top:22px}
+    footer{background:#041321;color:#b9c8d5;padding:30px 0;font-size:.78rem}
+    .footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center}
+    .footer-row strong{color:#fff}
+    .footer-links{display:flex;gap:18px;flex-wrap:wrap}
+    .footer-links a:hover{color:var(--gold)}
+    .search-panel{display:none;background:#0c2a45;padding:16px 0;border-top:1px solid rgba(255,255,255,.12)}
+    .search-panel.open{display:block}
+    .search-row{display:flex;gap:10px}
+    .search-row input{width:100%;padding:13px 15px;border:1px solid #526a7f;border-radius:10px;background:#fff;color:#111}
+    .search-feedback{color:#f4dca9;font-size:.8rem;margin-top:8px;min-height:1.2em}
+    .mobile-menu{display:none;background:#0a2944;padding:8px 20px 18px}
+    .mobile-menu.open{display:grid;gap:4px}
+    .mobile-menu a{padding:11px 9px;color:#fff;border-bottom:1px solid rgba(255,255,255,.1);font-size:.9rem}
+    .toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#071a2e;color:#fff;padding:12px 18px;border-radius:12px;box-shadow:var(--shadow);font-size:.85rem;transition:.25s;z-index:300}
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+    .muted-label{font-size:.7rem;color:#8492a0}
+    @media(max-width:1050px){.nav-links{gap:11px;font-size:.75rem}.brand{min-width:190px}.nav-actions .btn{padding:11px 13px}.units-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:820px){.nav-links,.nav-actions>.btn{display:none}.menu-toggle{display:grid}.hero-grid{grid-template-columns:1fr;gap:18px;padding:65px 0 75px}.hero{min-height:auto}.hero-art{min-height:260px}.shield{width:220px}.orbit{width:290px;height:290px}.hero-note{bottom:2px}.quick-grid{grid-template-columns:repeat(2,1fr)}.about,.contact-grid{grid-template-columns:1fr;gap:28px}.places-grid,.services-grid{grid-template-columns:repeat(2,1fr)}.notice-inner{align-items:flex-start;flex-direction:column}.news-area{grid-template-columns:1fr}}
+    @media(max-width:520px){.container{width:min(100% - 30px,var(--max))}.topline .container{font-size:.67rem}.topline .container span:last-child{display:none}.nav-wrap{min-height:72px}.brand{min-width:0}.brand-name{font-size:.78rem}.crest{width:42px;height:42px}.hero-grid{padding:52px 0 65px}h1{font-size:2.8rem}.hero-copy{font-size:1rem}.hero-art{min-height:235px}.shield{width:195px}.shield-inner svg{width:68px;height:68px}.quick-section{margin-top:-20px}.quick-grid{gap:9px}.quick-card{padding:15px;min-height:132px}.quick-card strong{font-size:.82rem}.quick-card span:last-child{font-size:.7rem}section.content-section{padding:68px 0}.units-grid,.places-grid,.services-grid{grid-template-columns:1fr}.unit-card{min-height:0}.value-list{grid-template-columns:1fr}.about-panel,.contact-card,.contact-info{padding:25px}.footer-row{align-items:flex-start;flex-direction:column}.hero-buttons .btn{width:100%}.search-row{flex-direction:column}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <div class="topline"><div class="container"><span><strong>PREFEITURA DE BELÉM</strong> &nbsp;·&nbsp; GUARDA MUNICIPAL</span><span>Portal institucional · Belém — Pará</span></div></div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#inicio" aria-label="Guarda Municipal de Belém — início">
+        <span class="crest" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M24 4 40 10v13c0 10-6.8 17-16 21C14.8 40 8 33 8 23V10L24 4Z" stroke="currentColor" stroke-width="2.5"/><path d="M24 12v22M15 19h18M17 28h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="24" cy="19" r="4" stroke="currentColor" stroke-width="2"/></svg></span>
+        <span class="brand-name">GUARDA MUNICIPAL<br>DE BELÉM<small>SEGURANÇA E CIDADANIA</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Navegação principal">
+        <a href="#institucional">Institucional</a><a href="#grupamentos">Grupamentos</a><a href="#atuacao">Atuação</a><a href="#noticias">Notícias</a><a href="#servicos">Serviços</a><a href="#contato">Contato</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="searchToggle" aria-label="Abrir pesquisa" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button>
+        <button class="icon-btn" id="accessToggle" aria-label="Opções de acessibilidade" title="Aumentar texto e contraste"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 9h8M12 9v9m-3-4 3 4 3-4"/></svg></button>
+        <a class="btn btn-gold" href="#contato">Fale com a GMB</a>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+    <div class="search-panel" id="searchPanel"><div class="container"><div class="search-row"><input id="siteSearch" type="search" placeholder="O que você procura? Ex.: ouvidoria, grupamentos..." aria-label="Pesquisar no portal"><button class="btn btn-gold" id="searchGo">Pesquisar</button></div><div class="search-feedback" id="searchFeedback" aria-live="polite"></div></div></div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Menu para celular">
+      <a href="#institucional">Institucional</a><a href="#grupamentos">Grupamentos</a><a href="#atuacao">Onde atuamos</a><a href="#noticias">Notícias e comunicados</a><a href="#servicos">Serviços ao cidadão</a><a href="#transparencia">Transparência</a><a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Presença · Proteção · Cidadania</span>
+          <h1>GUARDA MUNICIPAL DE BELÉM</h1>
+          <p class="hero-copy">Protegendo o patrimônio público, promovendo a segurança e cuidando da nossa cidade.</p>
+          <p class="hero-quote">“Somos poucos, porém, sem modéstia, muito bons.”</p>
+          <div class="hero-buttons"><a class="btn btn-gold" href="#institucional">Conheça a Guarda <span aria-hidden="true">→</span></a><a class="btn btn-outline" href="#servicos">Serviços ao cidadão</a></div>
+        </div>
+        <div class="hero-art" aria-label="Ilustração vetorial institucional em forma de escudo" role="img">
+          <div class="orbit" aria-hidden="true"></div>
+          <div class="shield"><div class="shield-inner"><svg viewBox="0 0 100 110" fill="none"><path d="M50 5 89 19v31c0 25-16 43-39 55C27 93 11 75 11 50V19L50 5Z" stroke="currentColor" stroke-width="3"/><path d="M50 24v51M29 42h42M34 59h32" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="50" cy="42" r="9" stroke="currentColor" stroke-width="3"/></svg><b>GMB</b><span>BELÉM · PARÁ</span></div></div>
+          <span class="hero-note">PORTAL INSTITUCIONAL · VERSÃO DEMONSTRATIVA</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-section" aria-label="Acessos rápidos"><div class="container quick-grid">
+      <a class="quick-card emergency" href="tel:153"><span class="q-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3.1 5.2 2 2 0 0 1 5.1 3h3a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.7L8.2 11a16 16 0 0 0 4.8 4.8l1.6-1.8a2 2 0 0 1 1.7-.6l3 .5a2 2 0 0 1 1.7 2Z"/></svg></span><strong>Emergência 153</strong><span>Ligação rápida para atendimento</span></a>
+      <a class="quick-card" href="#servicos"><span class="q-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><strong>Monitoramento 24h</strong><span>Informações sobre o serviço</span></a>
+      <a class="quick-card" href="#contato"><span class="q-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v14H4z"/><path d="m4 7 8 6 8-6"/></svg></span><strong>Ouvidoria</strong><span>Fale com a Guarda Municipal</span></a>
+      <a class="quick-card" href="#transparencia"><span class="q-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 3 8v2h18V8l-9-5ZM5 10v8m5-8v8m4-8v8m5-8v8M3 21h18"/></svg></span><strong>Transparência</strong><span>Informações institucionais</span></a>
+    </div></section>
+
+    <section class="content-section" id="institucional"><div class="container about">
+      <div class="about-copy"><div class="section-head"><span class="kicker">Quem somos</span><h2>Uma instituição a serviço da população.</h2><p>Conheça a Guarda Municipal de Belém, sua atuação e seu compromisso com a cidade.</p></div>
+        <p>A Guarda Municipal de Belém integra a estrutura pública municipal e atua na proteção do patrimônio público, em ações preventivas e no apoio à segurança urbana, em diálogo com a população e os demais órgãos públicos.</p>
+        <div class="value-list"><div class="value"><i></i>Proteção do patrimônio</div><div class="value"><i></i>Prevenção</div><div class="value"><i></i>Respeito ao cidadão</div><div class="value"><i></i>Serviço público</div></div>
+        <a class="btn btn-blue" href="https://guarda.belem.pa.gov.br/" target="_blank" rel="noopener">Acessar portal oficial <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="about-panel"><span class="mini">MISSÃO INSTITUCIONAL</span><h3>Segurança urbana com presença e compromisso público.</h3><p>Assegurar a proteção do patrimônio público municipal e contribuir para a segurança urbana, priorizando ações preventivas, proteção dos direitos dos cidadãos e manutenção da ordem pública.</p></div>
+    </div></section>
+
+    <section class="content-section units-section" id="grupamentos"><div class="container">
+      <div class="section-head"><span class="kicker">Estrutura operacional</span><h2>Conheça os grupamentos</h2><p>Áreas e unidades mencionadas no material institucional de referência. As descrições detalhadas e páginas individuais dependem de validação e publicação oficial.</p></div>
+      <div class="units-grid">
+        <article class="unit-card"><span class="unit-code">GMB · 01</span><h3>Grupamento Operacional</h3><p>Estrutura operacional da Guarda Municipal de Belém.</p><small>Detalhes institucionais a confirmar</small></article>
+        <article class="unit-card"><span class="unit-code">IEAT · 02</span><h3>Inspetoria Especial de Ações Táticas</h3><p>Unidade especializada citada no material de referência.</p><small>Detalhes institucionais a confirmar</small></article>
+        <article class="unit-card"><span class="unit-code">GAT · 03</span><h3>Grupo de Ações Táticas</h3><p>Grupamento identificado na estrutura apresentada.</p><small>Detalhes institucionais a confirmar</small></article>
+        <article class="unit-card"><span class="unit-code">RONDAC · 04</span><h3>Ronda da Capital</h3><p>Grupamento identificado na estrutura apresentada.</p><small>Detalhes institucionais a confirmar</small></article>
+        <article class="unit-card"><span class="unit-code">ATAC · 05</span><h3>Ações Táticas com Cães</h3><p>Unidade especializada citada no material de referência.</p><small>Detalhes institucionais a confirmar</small></article>
+        <article class="unit-card"><span class="unit-code">ROMU · 06</span><h3>Ronda Ostensiva Municipal</h3><p>Grupamento identificado na estrutura apresentada.</p><small>Detalhes institucionais a confirmar</small></article>
+        <article class="unit-card"><span class="unit-code">CULTURA · 07</span><h3>Banda de Música</h3><p>Atividade institucional e cultural mencionada no briefing.</p><small>Detalhes institucionais a confirmar</small></article>
+        <article class="unit-card"><span class="unit-code">PROJETO · 08</span><h3>Anjos da Guarda</h3><p>Projeto institucional citado no material de referência.</p><small>Detalhes institucionais a confirmar</small></article>
+      </div>
+    </div></section>
+
+    <section class="content-section" id="atuacao"><div class="container">
+      <div class="section-head"><span class="kicker">Presença municipal</span><h2>Onde a Guarda atua</h2><p>Frentes de atuação descritas no briefing institucional. Os locais específicos e os postos de serviço devem ser consultados nos canais oficiais.</p></div>
+      <div class="places-grid">
+        <article class="place"><span class="number">01 / PATRIMÔNIO</span><h3>Prédios públicos</h3><p>Proteção de instalações e bens pertencentes ao município.</p></article>
+        <article class="place"><span class="number">02 / ESPAÇOS PÚBLICOS</span><h3>Praças e áreas de convivência</h3><p>Presença preventiva em espaços públicos municipais.</p></article>
+        <article class="place"><span class="number">03 / EVENTOS</span><h3>Eventos municipais</h3><p>Apoio às atividades e programações promovidas pelo município.</p></article>
+        <article class="place"><span class="number">04 / MEMÓRIA</span><h3>Patrimônio histórico e cultural</h3><p>Atuação relacionada à proteção do patrimônio cultural.</p></article>
+        <article class="place"><span class="number">05 / EDUCAÇÃO</span><h3>Ambiente escolar</h3><p>Atuação em ações de segurança no contexto escolar.</p></article>
+        <article class="place"><span class="number">06 / CIDADANIA</span><h3>Ações municipais</h3><p>Apoio às iniciativas e aos serviços da administração municipal.</p></article>
+      </div>
+    </div></section>
+
+    <section class="notice-band"><div class="container notice-inner"><div><h2>Precisa de atendimento imediato?</h2><p>Em caso de emergência, ligue para o número 153.</p></div><a class="btn btn-gold" href="tel:153">Ligar 153 <span aria-hidden="true">→</span></a></div></section>
+
+    <section class="content-section" id="noticias"><div class="container">
+      <div class="section-head"><span class="kicker">Informação institucional</span><h2>Notícias e comunicados</h2><p>Espaço preparado para publicações oficiais da Guarda Municipal de Belém.</p></div>
+      <div class="news-area">
+        <article class="news-placeholder"><strong>Publicações oficiais</strong><p>As notícias, datas, imagens e comunicados não foram reproduzidos nesta demonstração porque precisam ser obtidos e validados na fonte oficial.</p></article>
+        <article class="news-placeholder"><strong>Acompanhe os canais oficiais</strong><p>Consulte o portal institucional para acessar as atualizações e os comunicados publicados pela Guarda Municipal.</p><a class="btn btn-blue" style="margin-top:16px" href="https://guarda.belem.pa.gov.br/" target="_blank" rel="noopener">Visitar portal oficial ↗</a></article>
+      </div>
+    </div></section>
+
+    <section class="content-section units-section" id="servicos"><div class="container">
+      <div class="section-head"><span class="kicker">Atendimento ao cidadão</span><h2>Serviços e acessos úteis</h2><p>Encontre os principais caminhos para atendimento e consulta de informações.</p></div>
+      <div class="services-grid">
+        <article class="service"><span class="q-icon">153</span><div><h3>Emergência</h3><p>Canal telefônico de emergência da Guarda Municipal.</p><a href="tel:153">Ligar para 153</a></div></article>
+        <article class="service"><span class="q-icon">24h</span><div><h3>Monitoramento</h3><p>Informação sobre monitoramento 24 horas, conforme briefing.</p><a href="#contato">Consultar canais</a></div></article>
+        <article class="service"><span class="q-icon">OUV</span><div><h3>Ouvidoria</h3><p>Canal de contato informado para a Ouvidoria GMB.</p><a href="tel:+5591984990129">Ligar (91) 98499-0129</a></div></article>
+        <article class="service"><span class="q-icon">COR</span><div><h3>Corregedoria</h3><p>Contato eletrônico institucional informado no material recebido.</p><a href="mailto:corregedoria@gbel.pmb.pa.gov.br">Enviar e-mail</a></div></article>
+        <article class="service"><span class="q-icon">GMB</span><div><h3>Como ingressar</h3><p>Consulte editais e informações de ingresso nos canais oficiais.</p><a href="https://guarda.belem.pa.gov.br/" target="_blank" rel="noopener">Consultar portal oficial ↗</a></div></article>
+        <article class="service"><span class="q-icon">SERV</span><div><h3>Acesso dos servidores</h3><p>O endereço do sistema interno não foi confirmado neste projeto.</p><span class="muted-label">Acesso não disponibilizado nesta demonstração</span></div></article>
+      </div>
+    </div></section>
+
+    <section class="content-section" id="transparencia"><div class="container">
+      <div class="section-head"><span class="kicker">Gestão pública</span><h2>Transparência e informação</h2><p>Consulte documentos, legislação e informações institucionais nos canais oficiais do município.</p></div>
+      <div class="services-grid">
+        <article class="service"><span class="q-icon">LEI</span><div><h3>Legislação e competências</h3><p>Consulte a legislação aplicável e as atribuições institucionais.</p><a href="https://guarda.belem.pa.gov.br/" target="_blank" rel="noopener">Portal da GMB ↗</a></div></article>
+        <article class="service"><span class="q-icon">ORG</span><div><h3>Estrutura organizacional</h3><p>Informações sobre a organização administrativa.</p><a href="https://guarda.belem.pa.gov.br/" target="_blank" rel="noopener">Portal da GMB ↗</a></div></article>
+        <article class="service"><span class="q-icon">DOC</span><div><h3>Documentos e comunicados</h3><p>Consulte publicações e documentos divulgados oficialmente.</p><a href="https://guarda.belem.pa.gov.br/" target="_blank" rel="noopener">Portal da GMB ↗</a></div></article>
+      </div>
+    </div></section>
+
+    <section class="content-section contact-section" id="contato"><div class="container contact-grid">
+      <div class="contact-card"><span class="kicker">Canais institucionais</span><h2>Estamos à disposição.</h2><p>Utilize os contatos divulgados no material de referência. Para situações de emergência, ligue 153.</p>
+        <div class="contact-line"><b>Emergência</b><a href="tel:153">153</a></div>
+        <div class="contact-line"><b>Ouvidoria GMB</b><a href="tel:+5591984990129">(91) 98499-0129</a></div>
+        <div class="contact-line"><b>E-mail · Comunicação</b><a href="mailto:ascom.gmb1@gmail.com">ascom.gmb1@gmail.com</a></div>
+        <div class="contact-line"><b>E-mail · Corregedoria</b><a href="mailto:corregedoria@gbel.pmb.pa.gov.br">corregedoria@gbel.pmb.pa.gov.br</a></div>
+      </div>
+      <div class="contact-info"><h3>Endereço institucional informado</h3><p>Av. Duque de Caxias, 394 — Belém, Pará.</p><p><strong>Atendimento e informações:</strong> confirme horários, procedimentos e eventuais alterações diretamente nos canais oficiais antes de se deslocar.</p><a class="btn btn-blue" href="https://guarda.belem.pa.gov.br/" target="_blank" rel="noopener">Acessar site oficial ↗</a>
+        <div class="note">Esta página é uma demonstração front-end. Não envia solicitações para sistemas da Prefeitura, não autentica servidores e não substitui os canais oficiais de atendimento.</div>
+      </div>
+    </div></section>
+  </main>
+
+  <footer><div class="container footer-row"><div><strong>GUARDA MUNICIPAL DE BELÉM</strong><br>Portal institucional demonstrativo · Belém — PA</div><div class="footer-links"><a href="#inicio">Início</a><a href="#servicos">Serviços</a><a href="#transparencia">Transparência</a><a href="#contato">Contato</a></div><span>© <span id="year"></span> · Conteúdo sujeito à validação oficial</span></div></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function(){
+      const $ = (s,root=document) => root.querySelector(s);
+      const menuToggle=$('#menuToggle'), mobileMenu=$('#mobileMenu');
+      menuToggle.addEventListener('click',()=>{
+        const open=mobileMenu.classList.toggle('open');
+        menuToggle.setAttribute('aria-expanded',String(open));
+        menuToggle.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');
+      });
+      mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+        mobileMenu.classList.remove('open');menuToggle.setAttribute('aria-expanded','false');menuToggle.setAttribute('aria-label','Abrir menu');
+      }));
+      const searchToggle=$('#searchToggle'), searchPanel=$('#searchPanel'), searchInput=$('#siteSearch'), searchFeedback=$('#searchFeedback');
+      searchToggle.addEventListener('click',()=>{
+        const open=searchPanel.classList.toggle('open');searchToggle.setAttribute('aria-expanded',String(open));
+        if(open)searchInput.focus();
+      });
+      function runSearch(){
+        const q=searchInput.value.trim().toLocaleLowerCase('pt-BR');
+        if(!q){searchFeedback.textContent='Digite um termo para pesquisar no conteúdo desta página.';searchInput.focus();return;}
+        const targets=[...document.querySelectorAll('main section[id]')];
+        const match=targets.find(el=>el.innerText.toLocaleLowerCase('pt-BR').includes(q));
+        if(match){searchFeedback.textContent='Resultado encontrado: '+(match.querySelector('h1,h2,h3')?.innerText||match.id)+'.';match.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
+        else searchFeedback.textContent='Nenhum resultado encontrado nesta página. Tente “ouvidoria”, “153”, “grupamentos” ou “transparência”.';
+      }
+      $('#searchGo').addEventListener('click',runSearch);
+      searchInput.addEventListener('keydown',e=>{if(e.key==='Enter')runSearch();});
+      $('#accessToggle').addEventListener('click',()=>{
+        document.body.classList.toggle('large-text');
+        document.body.classList.toggle('high-contrast');
+        showToast('Acessibilidade: tamanho do texto e contraste alternados.');
+      });
+      function showToast(message){
+        const toast=$('#toast');toast.textContent=message;toast.classList.add('show');
+        clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove('show'),2600);
+      }
+      $('#year').textContent=new Date().getFullYear();
+      document.addEventListener('keydown',e=>{
+        if(e.key==='Escape'&&mobileMenu.classList.contains('open')){mobileMenu.classList.remove('open');menuToggle.setAttribute('aria-expanded','false');menuToggle.focus();}
+        if(e.key==='Escape'&&searchPanel.classList.contains('open')){searchPanel.classList.remove('open');searchToggle.setAttribute('aria-expanded','false');searchToggle.focus();}
+      });
+      document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+        const target=document.querySelector(a.getAttribute('href'));
+        if(!target){e.preventDefault();showToast('Esta seção ainda não está disponível.');}
+      }));
+    })();
+  </script>
+</body>
+</html>
